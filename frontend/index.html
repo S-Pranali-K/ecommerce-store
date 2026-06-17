@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="glass-nav">
+
+        <h2>E-Commerce Store</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+
+            <a href="register.html">Register</a>
+
+            <a href="#" id="logoutBtn">Logout</a>
+
+            <a href="cart.html" id="cartLink">
+                Cart (0)
+            </a>
+            <a href="wishlist.html">
+                Wishlist
+            </a>
+            <a href="orders.html">
+                My Orders
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+            
+
+        </div>
+
+    </nav>
+
+
+    <div class="categories">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Products..."
+    >
+
+    <button onclick="filterProducts('All')">
+        All
+    </button>
+
+    <button onclick="filterProducts('Electronics')">
+        Electronics
+    </button>
+
+    <button onclick="filterProducts('Accessories')">
+        Accessories
+    </button>
+
+    <button onclick="filterProducts('Wearables')">
+        Wearables
+    </button>
+
+    <select id="sortProducts">
+
+    <option value="">
+        Sort By
+    </option>
+
+    <option value="low-high">
+        Price Low → High
+    </option>
+
+    <option value="high-low">
+        Price High → Low
+    </option>
+
+    <option value="rating">
+        Rating High → Low
+    </option>
+
+</select>
+
+</div>
+    <!-- Hero Banner -->
+
+    <section class="hero">
+
+        <h1>
+            Discover Premium Tech Products
+        </h1>
+
+        <p>
+            Shop smartphones, laptops, wearables and accessories from top brands.
+        </p>
+
+        <button
+            onclick="document.getElementById('products').scrollIntoView()"
+        >
+            Shop Now
+        </button>
+
+
+    </section>
+
+    <!-- Featured Products -->
+
+    <section class="products-section">
+
+        <h2>
+            Featured Products
+        </h2>
+
+        <div id="products">
+
+        </div>
+
+
+    </section>
+
+    <footer>
+
+        <p>
+            © 2026 E-Commerce Store
+        </p>
+
+    </footer>
+
+    <script src="js/products.js"></script>
+
+</body>
+</html>

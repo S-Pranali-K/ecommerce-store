@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Products</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="dashboard-box">
+
+    <h3>
+        Total Products
+    </h3>
+
+    <h1 id="productCount">
+        0
+    </h1>
+
+</div>
+    <script>
+
+const user =
+    JSON.parse(
+        localStorage.getItem('user')
+    );
+
+if (
+    !user ||
+    user.role !== 'admin'
+) {
+
+    alert('Admin Access Only');
+
+    window.location.href =
+        'index.html';
+
+}
+
+</script>
+<nav>
+
+    <h2>Manage Products</h2>
+
+    <div>
+
+        <a href="admin.html">
+            Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+<section class="page-header">
+
+    <h1>
+        📦 Product Management
+    </h1>
+
+    <p>
+        View, edit and delete products
+    </p>
+
+</section>
+
+<div style="padding:40px">
+
+    <div id="products">
+
+    </div>
+
+</div>
+
+<script src="js/manage-products.js"></script>
+
+</body>
+</html>

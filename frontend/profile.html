@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <h2>E-Commerce Store</h2>
+    </nav>
+
+    <section class="page-header">
+
+        <h1>
+            👤 My Profile
+        </h1>
+
+        <p>
+            Manage your account information and security
+        </p>
+
+    </section>
+
+    <div class="profile-card">
+
+        <h2>
+            Personal Information
+        </h2>
+
+        <label>
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
+        >
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            readonly
+        >
+
+        <label>
+            Role
+        </label>
+
+        <input
+            type="text"
+            id="role"
+            readonly
+        >
+
+        <hr>
+
+        <h2>
+            Security Settings
+        </h2>
+
+        <input
+            type="password"
+            id="oldPassword"
+            placeholder="Old Password"
+        >
+
+        <input
+            type="password"
+            id="newPassword"
+            placeholder="New Password"
+        >
+
+        <div class="profile-actions">
+
+            <button
+                id="updateBtn"
+                class="profile-btn"
+            >
+                Update Profile
+            </button>
+
+            <button
+                id="changePasswordBtn"
+                class="profile-btn"
+            >
+                Change Password
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="js/profile.js"></script>
+
+</body>
+</html>

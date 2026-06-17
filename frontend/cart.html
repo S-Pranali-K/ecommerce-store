@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="glass-nav">
+
+        <h2>E-Commerce Store</h2>
+
+        <div>
+
+            <a href="index.html">Home</a>
+
+            <a href="wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="orders.html">
+                My Orders
+            </a>
+
+        </div>
+
+    </nav>
+
+
+<section class="page-header">
+
+    <h1>
+        🛒 Shopping Cart
+    </h1>
+
+    <p>
+        Review your selected products before checkout
+    </p>
+
+</section>
+
+<div
+    style="
+        max-width:1200px;
+        margin:auto;
+        padding:40px;
+    "
+>
+
+    <div id="cartItems"></div>
+
+    <div
+        style="
+            background:white;
+            padding:25px;
+            border-radius:20px;
+            margin-top:30px;
+            box-shadow:0 10px 25px rgba(0,0,0,.05);
+        "
+    >
+
+        <h2 id="totalPrice"></h2>
+
+        <br>
+
+        <button
+            onclick="
+                window.location.href='checkout.html'
+            "
+        >
+            Proceed To Checkout
+        </button>
+
+    </div>
+
+</div>
+
+    <script src="js/cart.js"></script>
+
+</body>
+</html>

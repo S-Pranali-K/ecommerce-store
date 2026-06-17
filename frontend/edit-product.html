@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <script>
+
+const user =
+    JSON.parse(
+        localStorage.getItem('user')
+    );
+
+if (
+    !user ||
+    user.role !== 'admin'
+) {
+
+    alert('Admin Access Only');
+
+    window.location.href =
+        'index.html';
+
+}
+
+</script>
+<nav>
+    <h2>Edit Product</h2>
+</nav>
+
+<section class="page-header">
+
+    <h1>
+        ✏️ Edit Product
+    </h1>
+
+    <p>
+        Update product information
+    </p>
+
+</section>
+
+<div class="form-container">
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Product Name"
+    >
+
+    <input
+        type="text"
+        id="description"
+        placeholder="Description"
+    >
+
+    <input
+        type="number"
+        id="price"
+        placeholder="Price"
+    >
+
+    <input
+        type="text"
+        id="image"
+        placeholder="Image URL"
+    >
+
+    <input
+        type="number"
+        id="stock"
+        placeholder="Stock"
+    >
+
+    <select id="category">
+
+        <option value="Electronics">
+            Electronics
+        </option>
+
+        <option value="Accessories">
+            Accessories
+        </option>
+
+        <option value="Wearables">
+            Wearables
+        </option>
+
+    </select>
+
+    <button id="updateBtn">
+        Update Product
+    </button>
+
+</div>
+
+<script src="js/edit-product.js"></script>
+
+</body>
+</html>

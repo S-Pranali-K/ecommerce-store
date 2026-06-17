@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .stat-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #111,
+        #2b2b2b
+    );
+
+    color:white;
+
+    padding:25px;
+
+    width:230px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+    text-align:center;
+
+}
+
+.stat-card:hover{
+
+    transform:
+    translateY(-6px);
+
+}
+
+.stat-card h3{
+
+    color:#d1d5db;
+
+    font-size:1rem;
+
+}
+
+.stat-card h1{
+
+    margin-top:10px;
+
+    font-size:2rem;
+
+    color:white;
+
+}
+
+    </style>
+
+</head>
+<body>
+
+    <!-- ADMIN CHECK -->
+    <script>
+
+        const user =
+            JSON.parse(
+                localStorage.getItem('user')
+            );
+
+        if (
+            !user ||
+            user.role !== 'admin'
+        ) {
+
+            alert('Admin Access Only');
+
+            window.location.href =
+                'index.html';
+
+        }
+
+    </script>
+
+    <nav>
+
+        <h2>
+            Admin Dashboard
+        </h2>
+
+        <div>
+
+            <a href="index.html">
+                Store
+            </a>
+
+            <a href="#" id="logoutAdmin">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <div style="padding:40px">
+
+        <!-- STATISTICS -->
+
+        <div
+            id="statsContainer"
+            style="
+                display:flex;
+                gap:20px;
+                flex-wrap:wrap;
+                margin-bottom:30px;
+            "
+        >
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Products
+                </h3>
+
+                <h1 id="totalProducts">
+                    0
+                </h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    Today's Revenue
+                </h3>
+
+                <h1 id="todayRevenue">
+                    ₹0
+                </h1>
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Orders
+                </h3>
+
+                <h1 id="totalOrders">
+                    0
+                </h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Revenue
+                </h3>
+
+                <h1 id="totalRevenue">
+                    ₹0
+                </h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Users
+                </h3>
+
+                <h1 id="totalUsers">
+                    0
+                </h1>
+
+            </div>
+
+            <div class="stat-card">
+
+    <h3>
+        Top Product
+    </h3>
+
+    <h1 id="topProduct">
+        -
+    </h1>
+
+</div>
+
+        </div>
+
+        <h1
+    style="
+        font-size:3rem;
+        margin-bottom:10px;
+    "
+>
+    📊 Admin Dashboard
+</h1>
+
+<p
+    style="
+        color:#777;
+        margin-bottom:30px;
+    "
+>
+    Monitor products, orders, revenue and customers
+</p>
+
+
+        <div class="dashboard-box">
+
+    <h2>
+        📦 Latest Orders
+    </h2>
+
+    <div id="latestOrders">
+
+    </div>
+
+</div>
+
+        <br>
+
+        <button
+            onclick="
+                location.href=
+                'add-product.html'
+            "
+        >
+            ➕Add Product
+        </button>
+
+        <button
+            onclick="
+                location.href=
+                'manage-products.html'
+            "
+        >
+           📦 Manage Products
+        </button>
+
+        <button
+            onclick="
+                location.href=
+                'admin-orders.html'
+            "
+        >
+            📋 Manage Orders
+        </button>
+
+    </div>
+
+    <!-- LOGOUT -->
+
+    <script>
+
+        document
+            .getElementById(
+                'logoutAdmin'
+            )
+            .addEventListener(
+                'click',
+                () => {
+
+                    localStorage.removeItem(
+                        'user'
+                    );
+
+                    localStorage.removeItem(
+                        'token'
+                    );
+
+                    window.location.href =
+                        'admin-login.html';
+
+                }
+            );
+
+    </script>
+
+    <!-- DASHBOARD STATS -->
+
+    <script>
+
+async function loadStats() {
+
+    try {
+
+        const response =
+            await fetch(
+                'http://localhost:5000/api/products'
+            );
+
+        const products =
+            await response.json();
+
+        document.getElementById(
+            'totalProducts'
+        ).innerText =
+            products.length;
+
+        let totalOrders = 0;
+        let totalRevenue = 0;
+        let todayRevenue = 0;
+        let productSales = {};
+        let allOrders = [];
+
+        const today =
+            new Date()
+                .toLocaleDateString();
+
+        for (
+            let i = 0;
+            i < localStorage.length;
+            i++
+        ) {
+
+            const key =
+                localStorage.key(i);
+
+            if (
+                key.startsWith(
+                    'orders_'
+                )
+            ) {
+
+                const orders =
+                    JSON.parse(
+                        localStorage.getItem(
+                            key
+                        )
+                    ) || [];
+
+                    allOrders.push(
+                    ...orders
+                    );
+
+                totalOrders +=
+                    orders.length;
+
+                orders.forEach(order => {
+
+                    order.products.forEach(
+                        product => {
+
+                            totalRevenue +=
+                                product.price *
+                                (
+                                    product.quantity
+                                    || 1
+                                );
+
+                            const qty =
+    product.quantity || 1;
+
+if (
+    productSales[product.name]
+) {
+
+    productSales[
+        product.name
+    ] += qty;
+
+} else {
+
+    productSales[
+        product.name
+    ] = qty;
+
+}    
+
+                        }
+                    );
+
+                    if (
+                        order.date === today
+                    ) {
+
+                        order.products.forEach(
+                            product => {
+
+                                todayRevenue +=
+                                    product.price *
+                                    (
+                                        product.quantity
+                                        || 1
+                                    );
+
+                            }
+                        );
+
+                    }
+
+                });
+
+            }
+
+        }
+
+        document.getElementById(
+            'totalOrders'
+        ).innerText =
+            totalOrders;
+
+        document.getElementById(
+            'totalRevenue'
+        ).innerText =
+            `₹${totalRevenue}`;
+
+        document.getElementById(
+            'todayRevenue'
+        ).innerText =
+            `₹${todayRevenue}`;
+
+
+        let topProduct =
+    'No Sales';
+
+let maxSold = 0;
+
+for (
+    const productName
+    in productSales
+) {
+
+    if (
+        productSales[
+            productName
+        ] > maxSold
+    ) {
+
+        maxSold =
+            productSales[
+                productName
+            ];
+
+        topProduct =
+            productName;
+
+    }
+
+}
+
+latestOrdersHTML += `
+
+<div style="
+    display:flex;
+    gap:15px;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+">
+
+    <img
+        src="${order.products[0].image}"
+        width="70"
+        height="70"
+        style="
+            object-fit:cover;
+            border-radius:12px;
+        "
+    >
+
+    <div style="flex:1;">
+
+        <h4>
+            ${order.products[0].name}
+        </h4>
+
+        <p>
+            Order #${order.id}
+        </p>
+
+        <p>
+            ₹${orderTotal}
+        </p>
+
+    </div>
+
+    <span
+        style="
+            padding:8px 15px;
+            border-radius:999px;
+            color:white;
+            background:
+            ${
+                order.status === 'Delivered'
+                ? '#10b981'
+                : order.status === 'Shipped'
+                ? '#3b82f6'
+                : order.status === 'Processing'
+                ? '#f59e0b'
+                : '#ef4444'
+            };
+        "
+    >
+        ${order.status}
+    </span>
+
+</div>
+
+`;
+
+document.getElementById(
+    'latestOrders'
+).innerHTML =
+    latestOrdersHTML;
+
+document.getElementById(
+    'topProduct'
+).innerText =
+    `${topProduct}`;
+
+        const userResponse =
+            await fetch(
+                'http://localhost:5000/api/auth/users'
+            );
+
+        const users =
+            await userResponse.json();
+
+        document.getElementById(
+            'totalUsers'
+        ).innerText =
+            users.length;
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+loadStats();
+
+</script>
+
+</body>
+</html>
