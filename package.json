@@ -2,9 +2,9 @@
   "name": "ecommerce-store",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node backend/server.js"
   },
   "keywords": [],
   "author": "",

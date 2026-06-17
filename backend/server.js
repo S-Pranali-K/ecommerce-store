@@ -1,4 +1,8 @@
-require('dotenv').config();
+require('dotenv').config({
+
+path:'./backend/.env'
+
+});
 
 console.log("SERVER FILE LOADED");
 
@@ -30,8 +34,18 @@ app.get('/', (req, res) => {
 });
 
 // Server Start
-app.listen(5000, () => {
-  console.log('Server Started on Port 5000');
+
+const PORT =
+    process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+
+    console.log(
+
+        `Server Started on Port ${PORT}`
+
+    );
+
 });
 
 app.use(
