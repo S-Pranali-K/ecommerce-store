@@ -46,7 +46,7 @@ document.getElementById(
 
             const response =
                 await fetch(
-                    'http://localhost:5000/api/auth/update-profile',
+                    'https://ecommerce-store-7ij2.onrender.com/api/auth/update-profile',
                     {
                         method: 'PUT',
 
@@ -123,7 +123,7 @@ document.getElementById(
 
             const response =
                 await fetch(
-                    'http://localhost:5000/api/auth/change-password',
+                    'https://ecommerce-store-7ij2.onrender.com/api/auth/change-password',
                     {
                         method: 'PUT',
 

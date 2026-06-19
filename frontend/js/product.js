@@ -17,7 +17,7 @@ const reviewForm =
 async function loadProduct() {
 
     const response = await fetch(
-        `http://localhost:5000/api/products/${id}`
+        `https://ecommerce-store-7ij2.onrender.com/api/products/${id}`
     );
 
     const product = await response.json();
@@ -290,7 +290,7 @@ if (user) {
 
                 const response =
                     await fetch(
-                        `http://localhost:5000/api/products/${id}/review`,
+                        fetch(`https://ecommerce-store-7ij2.onrender.com/api/products/${id}`),
                         {
                             method: 'POST',
 

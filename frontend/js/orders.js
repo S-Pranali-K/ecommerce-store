@@ -27,7 +27,7 @@ async function loadOrders() {
 
         const response =
             await fetch(
-                `http://localhost:5000/api/orders/user/${user.email}`
+                `https://ecommerce-store-7ij2.onrender.com/api/orders/user/${user.email}`
             );
 
         const orders =

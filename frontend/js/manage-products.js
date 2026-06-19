@@ -14,7 +14,7 @@ async function loadProducts() {
 
     const response =
         await fetch(
-            'http://localhost:5000/api/products'
+            'https://ecommerce-store-7ij2.onrender.com/api/products'
         );
 
     const products =
@@ -89,7 +89,7 @@ async function deleteProduct(id) {
 
     const response =
         await fetch(
-            `http://localhost:5000/api/products/${id}`,
+            `https://ecommerce-store-7ij2.onrender.com/api/products/${id}`,
             {
                 method: 'DELETE'
             }

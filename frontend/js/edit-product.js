@@ -10,7 +10,7 @@ async function loadProduct() {
 
     const response =
         await fetch(
-            `http://localhost:5000/api/products/${id}`
+            `https://ecommerce-store-7ij2.onrender.com/api/products/${id}`
         );
 
     const product =
@@ -80,7 +80,7 @@ document
 
             const response =
                 await fetch(
-                    `http://localhost:5000/api/products/${id}`,
+                    `https://ecommerce-store-7ij2.onrender.com/api/products/${id}`,
                     {
                         method: 'PUT',
 

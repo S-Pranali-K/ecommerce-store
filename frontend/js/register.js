@@ -11,7 +11,7 @@ registerBtn.addEventListener('click', async () => {
     try {
 
         const response = await fetch(
-            'http://localhost:5000/api/auth/register',
+            'https://ecommerce-store-7ij2.onrender.com/api/auth/register',
             {
                 method: 'POST',
                 headers: {

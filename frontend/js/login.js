@@ -8,7 +8,7 @@ loginBtn.addEventListener('click', async () => {
 
 
         const response = await fetch(
-            'http://localhost:5000/api/auth/login',
+            'https://ecommerce-store-7ij2.onrender.com/api/auth/login',
             {
                 method: 'POST',
                 headers: {

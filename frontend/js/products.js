@@ -10,7 +10,7 @@ async function loadProducts() {
     try {
 
         const response = await fetch(
-            'http://localhost:5000/api/products'
+            'https://ecommerce-store-7ij2.onrender.com/api/products'
         );
 
         allProducts =
@@ -321,3 +321,51 @@ sortProducts.addEventListener(
 
     }
 );
+
+const themeSelect =
+document.getElementById(
+'themeSelect'
+);
+
+if(themeSelect){
+
+const savedTheme =
+localStorage.getItem(
+'theme'
+);
+
+if(savedTheme){
+
+document.body.className =
+savedTheme;
+
+themeSelect.value =
+savedTheme;
+
+}
+
+themeSelect.addEventListener(
+
+'change',
+
+()=>{
+
+const theme =
+themeSelect.value;
+
+document.body.className =
+theme;
+
+localStorage.setItem(
+
+'theme',
+
+theme
+
+);
+
+}
+
+);
+
+}
